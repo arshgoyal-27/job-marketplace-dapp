@@ -40,12 +40,14 @@ contract JobMarketplace {
   event JobCreated(uint256 indexed jobId, address indexed employer,
                    string title, uint256 budget);
   event JobApplied(uint256 indexed jobId, address indexed applicant);
-  
+
   event FreelancerHired(uint256 indexed jobId, address indexed freelancer);
-  
+
   event JobCompleted(uint256 indexed jobId, address indexed freelancer,
                      uint256 payment);
   event JobCancelled(uint256 indexed jobId);
+  event FundsDeposited(uint256 indexed jobId, uint256 amount);
+  event DisputeRaised(uint256 indexed jobId);
 
   modifier onlyOwner() {
     require(msg.sender == owner, "Only owner can call this");
@@ -159,6 +161,39 @@ contract JobMarketplace {
     job.fundsDeposited = false;
 
     emit JobCancelled(_jobId);
+  }
+
+  function raiseDispute(uint256 _jobId) external jobExists(_jobId) {
+    Job storage job = jobs[_jobId];
+    require(msg.sender == job.employer || msg.sender == job.freelancer,
+            "Only employer or freelancer can raise dispute");
+    require(job.status == JobStatus.InProgress, "Job must be in progress");
+
+    job.status = JobStatus.Disputed;
+
+    emit DisputeRaised(_jobId);
+  }
+
+  function resolveDispute(uint256 _jobId, bool _favorFreelancer)
+      external jobExists(_jobId) onlyOwner {
+    Job storage job = jobs[_jobId];
+    require(job.status == JobStatus.Disputed, "Job is not disputed");
+    require(job.fundsDeposited, "Funds not available");
+
+    if (_favorFreelancer) {
+      uint256 platformFee = (job.budget * platformFeePercent) / 100;
+      uint256 freelancerPayment = job.budget - platformFee;
+
+      payable(job.freelancer).transfer(freelancerPayment);
+      payable(owner).transfer(platformFee);
+
+      job.status = JobStatus.Completed;
+    } else {
+      payable(job.employer).transfer(job.budget);
+      job.status = JobStatus.Cancelled;
+    }
+
+    job.fundsDeposited = false;
   }
 
   function getJobApplications(uint256 _jobId) external view jobExists(_jobId)
