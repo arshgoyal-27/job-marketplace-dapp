@@ -1,23 +1,18 @@
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-ethers");
-require("dotenv").config();
-
-module.exports = {
-  solidity: "0.8.17",
-  networks: {
-    coreTestnet: {
-      url: "https://rpc.test2.btcs.network",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 1114,
-    },
-  },
+export default {
+  solidity: "0.8.20",
   paths: {
-    artifacts: "./artifacts",
-    cache: "./cache",
     sources: "./contracts",
-    tests: "./test",
+    tests: "./contracts/test",
+    cache: "./contracts/cache",
+    artifacts: "./web/src/contracts/artifacts"
   },
+  typechain: {
+    outDir: 'web/src/contracts/types',
+    target: 'ethers-v6',
+  },
+  networks: {
+    localhost: {
+      url: "http://127.0.0.1:8545"
+    }
+  }
 };

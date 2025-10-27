@@ -1,17 +1,33 @@
 {
   "name": "job-marketplace-dapp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.js --network coreTestnet"
+  "description": "A decentralized job marketplace built on blockchain technology, enabling trustless connections between employers and freelancers with secure smart contract-based escrow and payments.",
+  "homepage": "https://github.com/arshgoyal-27/job-marketplace-dapp#readme",
+  "bugs": {
+    "url": "https://github.com/arshgoyal-27/job-marketplace-dapp/issues"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arshgoyal-27/job-marketplace-dapp.git"
+  },
+  "license": "ISC",
   "author": "",
-  "license": "MIT",
+  "type": "module",
+  "main": "hardhat.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.2",
+    "@nomicfoundation/hardhat-verify": "^3.0.4",
+    "chai": "^6.2.0",
+    "ethers": "^6.15.0",
+    "hardhat": "^3.0.9"
+  },
   "dependencies": {
-    
+    "@openzeppelin/contracts": "^5.4.0"
   }
-} 
+}
