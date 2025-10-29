@@ -1,42 +1,109 @@
-#root {
-  max-width: 1280px;
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px -1px var(--shadow);
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+nav a {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+nav a:hover {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-hover);
+}
+
+main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.loading, .error {
   text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.loading {
+  color: var(--text-secondary);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.error {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .card {
-  padding: 2em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px 0 var(--shadow);
 }
 
-.read-the-docs {
-  color: #888;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px var(--shadow);
+  border-color: var(--primary);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--warning);
+}
+
+.badge-pending {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: var(--text-secondary);
+}
+
+@media (prefers-color-scheme: light) {
+  header {
+    background: rgba(255, 255, 255, 0.8);
+  }
 }

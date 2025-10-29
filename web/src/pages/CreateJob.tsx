@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { getWriteContract } from '../lib/contract'
 import { parseEther } from 'ethers'
+import './CreateJob.css'
 
 export default function CreateJob() {
   const [title, setTitle] = useState('')
@@ -34,31 +35,71 @@ export default function CreateJob() {
   }
 
   return (
-    <div>
-      <h2>Create Job</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Title</label>
-          <input value={title} onChange={e => setTitle(e.target.value)} required />
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea value={description} onChange={e => setDescription(e.target.value)} required />
-        </div>
-        <div>
-          <label>Budget (ETH)</label>
-          <input type="number" step="0.0001" value={budgetEth} onChange={e => setBudgetEth(e.target.value)} required />
-        </div>
-        <div>
-          <label>Deadline</label>
-          <input type="datetime-local" value={deadline} onChange={e => setDeadline(e.target.value)} required />
-        </div>
-        <button type="submit" disabled={loading}>{loading ? 'Creating...' : 'Create Job'}</button>
-      </form>
-      {txHash && (
-        <p>Tx: {txHash}</p>
-      )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="create-job-page">
+      <div className="page-header">
+        <h1>Create New Job</h1>
+        <p className="page-subtitle">Post your project and find the perfect freelancer</p>
+      </div>
+      <div className="form-container card">
+        <form onSubmit={onSubmit} className="job-form">
+          <div className="form-group">
+            <label htmlFor="title">Job Title</label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              placeholder="e.g., Build a Web3 DApp"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              placeholder="Describe your project in detail..."
+              rows={6}
+              required
+            />
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="budget">Budget (ETH)</label>
+              <input
+                id="budget"
+                type="number"
+                step="0.0001"
+                value={budgetEth}
+                onChange={e => setBudgetEth(e.target.value)}
+                placeholder="0.0"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="deadline">Deadline</label>
+              <input
+                id="deadline"
+                type="datetime-local"
+                value={deadline}
+                onChange={e => setDeadline(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          {error && <div className="error-message">{error}</div>}
+          {txHash && (
+            <div className="success-message">
+              <strong>Job created successfully!</strong>
+              <p className="tx-hash">Transaction: <code>{txHash}</code></p>
+            </div>
+          )}
+          <button type="submit" disabled={loading} className="submit-button">
+            {loading ? 'Creating Job...' : 'Create Job'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

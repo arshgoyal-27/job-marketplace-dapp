@@ -1,0 +1,29 @@
+.wallet-connected {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.wallet-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+
+.wallet-address {
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+}
+
+.connect-button {
+  font-size: 0.875rem;
+}
+
