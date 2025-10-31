@@ -4,6 +4,7 @@ A decentralized job marketplace built on blockchain technology, enabling trustle
 
 ## Tech Stack
 
+
 ### Frontend
 - **React.js** - UI framework
 - **ethers.js** - Ethereum blockchain interaction
