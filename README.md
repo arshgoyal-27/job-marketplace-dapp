@@ -83,3 +83,5 @@ job-marketplace-dapp/
 - Integration with decentralized identity (DID)
 - Cross-chain compatibility
 - Mobile app development
+  
+<img width="1600" height="1041" alt="image" src="https://github.com/user-attachments/assets/48b1fcf0-abbb-43b3-b990-0c8d3d89f21d" />
